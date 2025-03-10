@@ -1,0 +1,15 @@
+volumes:
+  db_data:
+
+services:
+  postgres_container:
+    env_file:
+      - .env
+    image: postgres:17
+    container_name: postgres_container
+    hostname: postgres_container
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgres
+    ports:
+      - 5432:5432
