@@ -10,6 +10,6 @@ services:
     hostname: postgres_container
     restart: always
     volumes:
-      - db_data:/var/lib/postgres
+      - db_data:/var/lib/postgresql
     ports:
       - 5432:5432
