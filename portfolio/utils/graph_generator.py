@@ -6,9 +6,9 @@ from database.db_manager import IotTemperatureDbManager
 
 
 class GraphGenerator:
-    def get_avg_temperature_total(self, filter_by=None):
-        iottemperaturedbmanager = IotTemperatureDbManager()
-        session = iottemperaturedbmanager.get_session
+    def __get_avg_temperature_total(self, filter_by=None):
+        iot_temperature_db_manager = IotTemperatureDbManager()
+        session = iot_temperature_db_manager.get_session
 
         query_view_temperature_total = (
             session.query(
@@ -41,6 +41,7 @@ class GraphGenerator:
     def build_graph(
         self,
         plt_title,
+        filter_by=None,
         width=12,
         heigth=6,
         graph_type='bar',
@@ -51,7 +52,7 @@ class GraphGenerator:
 
         plt.figure(figsize=(width, heigth))
 
-        date, avg_temperatures = self.get_avg_temperature_total()
+        date, avg_temperatures = self.__get_avg_temperature_total(filter_by)
 
         if graph_type == 'bar':
             plt.bar(date, avg_temperatures)
