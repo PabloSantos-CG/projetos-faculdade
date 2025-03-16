@@ -1,7 +1,5 @@
-import os
 import pandas as pd
-from sqlalchemy import create_engine, Date, func
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Date, func
 from database.model import IotTemperature
 import matplotlib.pyplot as plt
 from database.db_manager import IotTemperatureDbManager
