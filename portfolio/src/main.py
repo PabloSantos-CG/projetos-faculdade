@@ -2,19 +2,26 @@ import os
 import pandas as pd
 from sqlalchemy import create_engine, Date, func
 from sqlalchemy.orm import sessionmaker
-from model import IotTemperature
+from database.model import IotTemperature
 import matplotlib.pyplot as plt
+from database.db_manager import IotTemperatureDbManager
 
+#-> deletar#
+# USER = os.environ.get('POSTGRES_USER')
+# PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+# DB_NAME = os.environ.get('POSTGRES_DB')
 
-
-USER = os.environ.get('POSTGRES_USER')
-PASSWORD = os.environ.get('POSTGRES_PASSWORD')
-DB_NAME = os.environ.get('POSTGRES_DB')
-
-URL_CONNECT = f'postgresql://{USER}:{PASSWORD}@localhost:5432/{DB_NAME}'
+# URL_CONNECT = f'postgresql://{USER}:{PASSWORD}@localhost:5432/{DB_NAME}'
+#<-#
 PATH_DATA = './data/IOT-temp.csv'
 
-engine = create_engine(URL_CONNECT)
+#-> deletar <-#
+# engine = create_engine(URL_CONNECT)
+#<-#
+
+iottemperaturedbmanager = IotTemperatureDbManager()
+engine, session = iottemperaturedbmanager.get_all_properties
+
 temperature_iot_df = pd.read_csv(PATH_DATA)
 
 temperature_iot_df["noted_date"] = pd.to_datetime(
@@ -33,9 +40,10 @@ temperature_iot_df.columns = ['id', 'room_id', 'date', 'temperature', 'location'
 #     }
 # )
 
-
-Session = sessionmaker(bind= engine)
-session = Session()
+#-> deletar <-#
+# Session = sessionmaker(bind= engine)
+# session = Session()
+#<-#
 
 # 1 - média da temperatura geral - gráfico em linha
 temperatures_total = (
