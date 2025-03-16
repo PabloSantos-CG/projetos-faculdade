@@ -13,7 +13,7 @@ class GraphGenerator:
         query_view_temperature_total = (
             session.query(
                 IotTemperature.date,
-                func.avg(IotTemperature.temp)
+                func.avg(IotTemperature.temperature)
             )
         )
 
@@ -41,6 +41,7 @@ class GraphGenerator:
     def build_graph(
         self,
         plt_title,
+        title_png_for_save,
         filter_by=None,
         width=12,
         heigth=6,
@@ -76,9 +77,9 @@ class GraphGenerator:
         # Exibindo o gráfico
         plt.tight_layout()  # Ajusta o layout para não sobrepor elementos
 
-        # Mostra o gráfico
-        plt.show()
+        # Use para mostrar o gráfico no jupyter notebook
+        # plt.show()
 
-        # Salva o gráfico como png
-        # plt.savefig('figure_temperatures_total.png', format='png')
-        # plt.close()
+        # Use quando estiver executando pelo VsCode
+        plt.savefig(f'./outputs/{title_png_for_save}-figure.png', format='png')
+        plt.close()

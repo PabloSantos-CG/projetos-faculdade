@@ -42,16 +42,19 @@ graph_generator = GraphGenerator()
 graph_generator.build_graph(
     plt_title='Média de Temperatura Geral',
     graph_type='plot',
+    title_png_for_save='avg-total'
 )
 
 # 2 - média da temperatura dentro da sala - gráfico barra
 graph_generator.build_graph(
-    plt_title='Média de Temperatura Geral',
+    plt_title='Média de Temperatura dentro da sala',
     filter_by='In',
+    title_png_for_save='avg-in-room'
 )
 
 # 3 - média da temperatura fora da sala - gráfico barra
 graph_generator.build_graph(
-    plt_title='Média de Temperatura Geral',
+    plt_title='Média de Temperatura fora da sala',
     filter_by='Out',
+    title_png_for_save='avg-out-room'
 )

@@ -10,5 +10,5 @@ class IotTemperature(Base):
     id = Column(String, primary_key=True)
     room_id = Column(String)
     date = Column(Date)
-    temp = Column(String)
+    temperature = Column(String)
     location = Column(String)
