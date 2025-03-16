@@ -10,7 +10,7 @@ class GraphGenerator:
         iot_temperature_db_manager = IotTemperatureDbManager()
         session = iot_temperature_db_manager.get_session
 
-        query_view_temperature_total = (
+        query_view_temperature = (
             session.query(
                 IotTemperature.date,
                 func.avg(IotTemperature.temperature)
@@ -18,30 +18,30 @@ class GraphGenerator:
         )
 
         if filter_by == 'In':
-            query_view_temperature_total = (
-                query_view_temperature_total.filter_by(location=filter_by)
+            query_view_temperature = (
+                query_view_temperature.filter_by(location=filter_by)
             )
         elif filter_by == 'Out':
-            query_view_temperature_total = (
-                query_view_temperature_total.filter_by(location=filter_by)
+            query_view_temperature = (
+                query_view_temperature.filter_by(location=filter_by)
             )
 
-        view_temperature_total = (
-            query_view_temperature_total
+        view_temperature = (
+            query_view_temperature
             .group_by(IotTemperature.date)
             .order_by(IotTemperature.date)
             .all()
         )
 
-        date = [row[0] for row in view_temperature_total]
-        avg_temperatures = [row[1] for row in view_temperature_total]
+        date = [row[0] for row in view_temperature]
+        avg_temperatures = [row[1] for row in view_temperature]
 
         return (date, avg_temperatures)
 
     def build_graph(
         self,
         plt_title,
-        title_png_for_save,
+        path_title_png,
         filter_by=None,
         width=12,
         heigth=6,
@@ -81,5 +81,5 @@ class GraphGenerator:
         # plt.show()
 
         # Use quando estiver executando pelo VsCode
-        plt.savefig(f'./outputs/{title_png_for_save}-figure.png', format='png')
+        plt.savefig(f'./outputs/{path_title_png}-figure.png', format='png')
         plt.close()

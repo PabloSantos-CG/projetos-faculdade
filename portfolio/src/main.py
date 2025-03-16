@@ -38,23 +38,23 @@ temperature_iot_df.to_sql(
 # VIEWS com o SqlAlchemy ORM
 graph_generator = GraphGenerator()
 
-# 1 - Média da temperatura geral - gráfico em linha
+## 1 - Média da temperatura geral - gráfico em linha
 graph_generator.build_graph(
     plt_title='Média de Temperatura Geral',
     graph_type='plot',
-    title_png_for_save='avg-total'
+    path_title_png='avg-total'
 )
 
-# 2 - média da temperatura dentro da sala - gráfico barra
+## 2 - média da temperatura dentro da sala - gráfico barra
 graph_generator.build_graph(
     plt_title='Média de Temperatura dentro da sala',
     filter_by='In',
-    title_png_for_save='avg-in-room'
+    path_title_png='avg-in-room'
 )
 
-# 3 - média da temperatura fora da sala - gráfico barra
+## 3 - média da temperatura fora da sala - gráfico barra
 graph_generator.build_graph(
     plt_title='Média de Temperatura fora da sala',
     filter_by='Out',
-    title_png_for_save='avg-out-room'
+    path_title_png='avg-out-room'
 )
